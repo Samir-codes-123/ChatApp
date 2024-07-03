@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
+  status: false,
   messages: [], //map
 };
 const msgSlice = createSlice({
@@ -8,6 +9,7 @@ const msgSlice = createSlice({
   reducers: {
     //login/start
     login: (state, action) => {
+      state.status = true;
       state.messages = action.payload;
     },
     // add msg
@@ -22,6 +24,10 @@ const msgSlice = createSlice({
     },
     //update
     // logout/end
+    logout: (state) => {
+      state.status = false;
+      state.messages = [];
+    },
   },
 });
 export const { login, addMsg, rmMsg } = msgSlice.actions;

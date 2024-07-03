@@ -1,10 +1,16 @@
-import Room from "./pages/Room";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import { Outlet, Navigate } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Room />
-    </>
+    <div>
+      <div>
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </div>
   );
 }
 
