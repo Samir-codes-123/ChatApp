@@ -12,12 +12,17 @@ const msgSlice = createSlice({
     },
     // add msg
     addMsg: (state, action) => {
-      state.messages.push(action.payload);
+      state.messages.unshift(action.payload);
     },
     // remove
+    rmMsg: (state, action) => {
+      state.messages = state.messages.filter(
+        (message) => message.$id !== action.payload,
+      );
+    },
     //update
     // logout/end
   },
 });
-export const { login, addMsg } = msgSlice.actions;
+export const { login, addMsg, rmMsg } = msgSlice.actions;
 export default msgSlice.reducer;

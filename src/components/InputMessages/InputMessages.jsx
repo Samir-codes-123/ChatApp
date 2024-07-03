@@ -2,17 +2,15 @@ import { useState } from "react";
 import dbService from "../../appwriteConfig/appwriteDBconfig";
 import Input from "../Input";
 import Button from "../Button";
-import { useDispatch } from "react-redux";
-import { addMsg } from "../../store/messageSlice";
 
 const InputMessages = () => {
   const [input, setInput] = useState("");
-  const dispatch = useDispatch();
+
   const handeSubmit = async (e) => {
     e.preventDefault();
-    const response = await dbService.createPost(input);
+    const response = await dbService.createPost(input); // sends realtime event
     console.log(response);
-    dispatch(addMsg(response));
+    // dispatch(addMsg(response)); dont need to do this done by realtime
     setInput("");
   };
 
