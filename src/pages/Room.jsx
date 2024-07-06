@@ -3,8 +3,6 @@ import Messages from "../components/Messages/Messages";
 import InputMessages from "../components/InputMessages/InputMessages";
 
 const Room = () => {
-  // TODO add loading
-
   return (
     <div>
       <InputMessages />

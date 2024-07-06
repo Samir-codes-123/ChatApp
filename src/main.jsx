@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Room from "./pages/Room.jsx";
 import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={false}>
             <Login />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/signup",
+        element: (
+          <AuthLayout authentication={false}>
+            <Signup />
           </AuthLayout>
         ),
       },

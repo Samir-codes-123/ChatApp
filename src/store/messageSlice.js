@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   status: false,
+  userInfo: null,
   messages: [], //map
 };
 const msgSlice = createSlice({
@@ -10,6 +11,10 @@ const msgSlice = createSlice({
     //login/start
     login: (state, action) => {
       state.status = true;
+      state.userInfo = action.payload;
+      console.log("useer", state.userInfo);
+    },
+    intialMsg: (state, action) => {
       state.messages = action.payload;
     },
     // add msg
@@ -23,12 +28,21 @@ const msgSlice = createSlice({
       );
     },
     //update
+    updateMsg: (state, action) => {
+      state.messages = state.messages.map((message) => {
+        if (message.$id === action.payload.$id) {
+          return { ...message, body: action.payload.body };
+        }
+        return message;
+      });
+    },
     // logout/end
     logout: (state) => {
       state.status = false;
-      state.messages = [];
+      state.userInfo = null;
     },
   },
 });
-export const { login, addMsg, rmMsg } = msgSlice.actions;
+export const { login, addMsg, rmMsg, intialMsg, logout, updateMsg } =
+  msgSlice.actions;
 export default msgSlice.reducer;

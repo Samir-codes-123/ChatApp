@@ -4,26 +4,41 @@ import conf from "../conf/conf";
 export class DbService {
   client = new Client();
   databases;
+  unsubscribeFn = null; // to store the subscribe function
+
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.databases = new Databases(this.client);
-    this.unsubscribeFn = null; // to store the unsubscribe function
   }
 
-  async createPost(message) {
+  async createPost({ name, $id }, message) {
+    // username and user_id from create account
     try {
       const response = await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         ID.unique(), // document id
-        { body: message }, // content
+        { username: name, user_id: $id, body: message }, // content
       );
-      console.log(response);
+      //console.log(response);
       return response;
     } catch (error) {
       console.log("Appwrite service :: createPost :: error", error);
+    }
+  }
+
+  async updatePost(msgid, newmessage) {
+    try {
+      return await this.databases.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        msgid,
+        { body: newmessage }, // only send what needs to be updated other thing is updated my appwrite
+      );
+    } catch (error) {
+      console.log("Appwrite service :: updatePost:: error", error);
     }
   }
 
@@ -54,6 +69,7 @@ export class DbService {
       return false;
     }
   }
+
   realTime(callback) {
     console.log("Subscribing to real-time updates");
     this.unsubscribeFn = this.client.subscribe(
