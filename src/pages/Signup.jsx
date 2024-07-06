@@ -5,11 +5,14 @@ import Button from "../components/Button";
 import { useNavigate, Link } from "react-router-dom";
 import authService from "../appwriteConfig/appwriteAuthConfig";
 import { login } from "../store/messageSlice";
+import { useState } from "react";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState(null);
   const signup = async (data) => {
+    setError(null);
     try {
       const session = await authService.createAccount(data);
       if (session) {
@@ -21,11 +24,17 @@ const Signup = () => {
       }
     } catch (error) {
       console.log(error);
+      setError(error.message);
     }
   };
 
   return (
     <div>
+      {error && (
+        <div>
+          <p>{error}</p>
+        </div>
+      )}
       <div>
         <form onSubmit={handleSubmit(signup)}>
           <Input

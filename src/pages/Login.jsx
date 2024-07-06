@@ -6,12 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwriteConfig/appwriteAuthConfig";
 import { login as sliceLogin } from "../store/messageSlice";
 import { ExternalLink } from "react-feather";
+import { useState } from "react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [error, SetError] = useState(null);
   // const login = async (data) => {
   //   try {
   //     const session = await authService.login(data);
@@ -28,6 +29,7 @@ const Login = () => {
   //   }
   // };
   const login = async (data) => {
+    SetError(null);
     console.log("Attempting to login with data:", data);
     try {
       const session = await authService.login(data);
@@ -42,11 +44,18 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
+      SetError(error.message);
     }
   };
 
   return (
     <div>
+      {error && (
+        <div>
+          {error}
+          <p></p>
+        </div>
+      )}
       <div>
         <form onSubmit={handleSubmit(login)}>
           <Input
