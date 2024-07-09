@@ -42,7 +42,7 @@ export default function Protected({ children, authentication = true }) {
   }, [authStatus, navigate, authentication, userFetched]); // Include userFetched in the dependency array
 
   return loader ? (
-    <Loader className=" text-3xl w-full h-96 animate-spin" />
+    <Loader className=" text-3xl w-full h-64 animate-spin" />
   ) : (
     <>{children}</>
   );

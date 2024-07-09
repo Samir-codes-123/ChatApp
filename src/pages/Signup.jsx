@@ -30,7 +30,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full  flex flex-col justify-center items-center bg-slate-200 space-y-6">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-slate-200 space-y-6">
       {error && (
         <div>
           <p className="text-red-600">{error}</p>
