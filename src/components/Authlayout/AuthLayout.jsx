@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import authService from "../../appwriteConfig/appwriteAuthConfig";
 import { login as sliceLogin } from "../../store/messageSlice";
+import { Loader } from "react-feather";
 
 export default function Protected({ children, authentication = true }) {
   const navigate = useNavigate();
@@ -40,5 +41,9 @@ export default function Protected({ children, authentication = true }) {
     }
   }, [authStatus, navigate, authentication, userFetched]); // Include userFetched in the dependency array
 
-  return loader ? <h1>Loading...</h1> : <>{children}</>;
+  return loader ? (
+    <Loader className=" text-3xl w-full h-96 animate-spin" />
+  ) : (
+    <>{children}</>
+  );
 }

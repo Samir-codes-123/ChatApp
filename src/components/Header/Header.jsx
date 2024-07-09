@@ -1,17 +1,18 @@
-import React from "react";
 import Logout from "./Logout";
 import { useSelector } from "react-redux";
 
 const Header = () => {
   const user = useSelector((state) => state.msg.userInfo);
   return (
-    <div>
+    <div className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md ">
       {user ? (
-        <div>
-          Welcome {user.name}
+        <div className="text-xl font-medium">
+          Welcome, {user.name}
           <Logout />
         </div>
-      ) : null}
+      ) : (
+        <h1 className="font-semibold">SamChat </h1>
+      )}
     </div>
   );
 };

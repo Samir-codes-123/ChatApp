@@ -1,4 +1,3 @@
-import React from "react";
 import { LogOut } from "react-feather";
 import authService from "../../appwriteConfig/appwriteAuthConfig";
 import { useDispatch } from "react-redux";
@@ -8,7 +7,12 @@ const Logout = () => {
   const handleClick = () => {
     authService.logout().then(dispatch(sliceLogout()));
   };
-  return <LogOut onClick={handleClick} />;
+  return (
+    <LogOut
+      onClick={handleClick}
+      className="inline mx-2  text-white hover:text-red-700 cursor-pointer"
+    />
+  );
 };
 
 export default Logout;

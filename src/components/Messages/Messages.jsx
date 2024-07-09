@@ -78,48 +78,76 @@ const Messages = () => {
   };
 
   return (
-    <div>
-      {messages.map((message) => (
-        <div key={message.$id}>
-          <div>
-            <p>
-              {message.username ? (
-                <span>{message.username}</span>
-              ) : (
-                <span>Anonymous user </span>
-              )}
-              {new Date(message.$createdAt).toLocaleString()}
-            </p>
-            {user?.$id === message.user_id ? (
-              <div>
-                <span>
-                  <Trash2 onClick={() => Delete(message)} />
+    <div className="w-full h-full flex justify-center items-center bg-slate-200 p-4">
+      <div className="h-full w-full max-w-4xl overflow-y-auto space-y-3">
+        {messages.map((message) => (
+          <div
+            key={message.$id}
+            className={`max-w-md w-full p-4 border-2 rounded-lg shadow-md hover:bg-gradient-to-r from-blue-300 to-slate-400 cursor-move ${
+              message.user_id === user?.$id
+                ? "border-blue-600 bg-white"
+                : "bg-blue-600 border-white"
+            }`}
+          >
+            <div className="flex justify-between items-center">
+              <p className="flex items-center gap-2">
+                <span
+                  className={
+                    message.user_id === user?.$id
+                      ? "text-blue-600 font-medium"
+                      : "text-white font-medium"
+                  }
+                >
+                  {message.user_id === user?.$id ? "Me" : message.username}
                 </span>
-                <span>
+                <span
+                  className={
+                    message.user_id === user?.$id
+                      ? "text-blue-600 text-xs"
+                      : "text-white text-xs"
+                  }
+                >
+                  {new Date(message.$createdAt).toLocaleString()}
+                </span>
+              </p>
+              {user?.$id === message.user_id && (
+                <div className="flex gap-2">
+                  <Trash2
+                    onClick={() => Delete(message)}
+                    className="text-sm text-blue-800 hover:text-red-600 cursor-pointer"
+                  />
                   {editingMsgId === message.$id ? (
-                    <Check onClick={() => update(message)} />
+                    <Check
+                      onClick={() => update(message)}
+                      className="text-green-500 cursor-pointer"
+                    />
                   ) : (
-                    <Edit onClick={() => edit(message)} />
+                    <Edit
+                      onClick={() => edit(message)}
+                      className="text-sm text-blue-800 hover:text-green-500 cursor-pointer"
+                    />
                   )}
+                </div>
+              )}
+            </div>
+            <div className="mt-2">
+              {editingMsgId === message.$id ? (
+                <Input
+                  label="Update new message"
+                  value={newMsg}
+                  onChange={(e) => setNewMsg(e.target.value)}
+                />
+              ) : (
+                <span
+                  className={`block text-xl font-semibold ${message.user_id === user?.$id ? "text-blue-700" : "text-white"}`}
+                >
+                  {message.body}
                 </span>
-              </div>
-            ) : null}
+              )}
+            </div>
           </div>
-          <div>
-            {editingMsgId === message.$id ? (
-              <Input
-                label="Update new message"
-                value={newMsg}
-                onChange={(e) => {
-                  setNewMsg(e.target.value);
-                }}
-              />
-            ) : (
-              <span>{message.body}</span>
-            )}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import dbService from "../../appwriteConfig/appwriteDBconfig";
-import Input from "../Input";
+import { Send } from "react-feather";
 import Button from "../Button";
 import { useSelector } from "react-redux";
 
@@ -16,13 +16,20 @@ const InputMessages = () => {
   };
 
   return (
-    <form onSubmit={handeSubmit}>
-      <Input
+    <form
+      onSubmit={handeSubmit}
+      className="w-full h-1/3 flex space-x-3 p-4 rounded "
+    >
+      <textarea
         required
         onChange={(e) => setInput(e.target.value)}
         value={input}
+        placeholder="Enter messages..."
+        className="h-24 w-2/3 outline-none border-4 border-blue-400 active:ring-2 active:ring-blue-200 rounded-xl p-2 shadow-lg"
       />
-      <Button>Send</Button>
+      <Button className="my-6">
+        <Send />
+      </Button>
     </form>
   );
 };

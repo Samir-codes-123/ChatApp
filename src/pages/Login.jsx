@@ -49,16 +49,20 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-slate-200 space-y-6">
       {error && (
-        <div>
+        <div className="text-xl font-semibold text-red-600">
           {error}
           <p></p>
         </div>
       )}
       <div>
-        <form onSubmit={handleSubmit(login)}>
+        <form
+          onSubmit={handleSubmit(login)}
+          className="w-96 h-96 space-y-6 p-4 border-2 rounded-md border-blue-500 bg-white flex flex-wrap flex-col shadow-lg"
+        >
           <Input
+            className=" invalid:border-red-500 invalid:ring-red-300"
             label="Email: "
             placeholder="Enter your email"
             type="email"
@@ -73,20 +77,23 @@ const Login = () => {
           />
           <Input
             label="Password: "
+            className=" invalid:border-red-500 invalid:ring-red-300"
             placeholder="Enter your password"
             type="password"
             {...register("password", {
               required: true,
             })}
           />
-          <Button type="submit">Login</Button>
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
+          <p className="text-m font-semibold">
+            Dont have a Account? Register here{" "}
+            <Link to="/signup">
+              <ExternalLink className="inline size-5 text-blue-700 hover:text-red-700" />
+            </Link>
+          </p>
         </form>
-        <p>
-          Dont have a Account? Register here{" "}
-          <Link to="/signup">
-            <ExternalLink />
-          </Link>
-        </p>
       </div>
     </div>
   );
