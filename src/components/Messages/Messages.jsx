@@ -153,7 +153,7 @@ const Messages = () => {
                     <img
                       src={dbService.getFilePreview(message.image)}
                       alt={message.username}
-                      className={`rounded-md hover:animate-pulse  border-2 ${message.user_id === user?.$id ? "border-blue-600" : "border-white"}`}
+                      className={`rounded-md hover:animate-pulse w-full h-auto object-cover  border-2 ${message.user_id === user?.$id ? "border-blue-600" : "border-white"}`}
                     />
                   )}
                 </span>
