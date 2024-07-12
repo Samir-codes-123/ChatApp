@@ -1,9 +1,10 @@
-import { Client, Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Query, Storage } from "appwrite";
 import conf from "../conf/conf";
 
 export class DbService {
   client = new Client();
   databases;
+  bucket;
   unsubscribeFn = null; // to store the subscribe function
 
   constructor() {
@@ -11,19 +12,24 @@ export class DbService {
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
     this.databases = new Databases(this.client);
+    this.bucket = new Storage(this.client);
   }
 
-  async createPost({ name, $id }, message) {
-    // username and user_id from create account
+  async createPost(userId, username, body, image = null) {
     try {
-      const response = await this.databases.createDocument(
+      const post = {
+        user_id: userId,
+        username: username,
+        body: body,
+        image: image,
+        type: image ? "media" : "text",
+      };
+      return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        ID.unique(), // document id
-        { username: name, user_id: $id, body: message }, // content
+        ID.unique(),
+        post,
       );
-      //console.log(response);
-      return response;
     } catch (error) {
       console.log("Appwrite service :: createPost :: error", error);
     }
@@ -91,6 +97,31 @@ export class DbService {
       this.unsubscribeFn(); // this.unsubscribeFn() calls the unsubscribe function, and then it clears the reference.
       this.unsubscribeFn = null;
     }
+  }
+
+  // uploading file
+  async uploadFile(file) {
+    if (!file || file === null || file === undefined) return;
+    try {
+      return await this.bucket.createFile(
+        conf.appwriteBucketId,
+        ID.unique(), //fileId
+        file,
+      );
+    } catch (error) {
+      console.log("Appwrite service :: uploadFile :: error", error);
+    }
+  }
+
+  async deleteFile(fileId) {
+    try {
+      return await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
+    } catch (error) {
+      console.log("Appwrite service :: deletefile :: error", error);
+    }
+  }
+  getFilePreview(fileId) {
+    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }
 

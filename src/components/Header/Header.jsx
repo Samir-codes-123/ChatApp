@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const user = useSelector((state) => state.msg.userInfo);
   return (
-    <div className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md ">
+    <div className="bg-blue-600 text-white p-4  shadow-md ">
       {user ? (
-        <div className="text-xl font-medium">
+        <div className="text-xl font-medium flex justify-between items-center">
           Welcome, {user.name}
           <Logout />
         </div>

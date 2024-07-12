@@ -57,14 +57,18 @@ const Messages = () => {
   }, [dispatch]); // show messages after dom renders
 
   const messages = useSelector((state) => state.msg.messages);
-  console.log("messages is", messages);
+  // console.log("messages is", messages);
 
   const user = useSelector((state) => state.msg.userInfo);
-  console.log("userInfo is ", user);
+  // console.log("userInfo is ", user);
 
   const Delete = async (msg) => {
     // sends realtime event
-    await dbService.deletePost(msg.$id); // works while reloading
+
+    await dbService.deletePost(msg.$id);
+    if (msg.type === "media") {
+      dbService.deleteFile(msg.image); // file id saved in image
+    } // works while reloading
     // dispatch(rmMsg(msg.$id)); dont need to do this done by realtime
   };
 
@@ -72,7 +76,9 @@ const Messages = () => {
     setEditingMsgId(msg.$id);
     setNewMsg(msg.body);
   };
+
   const update = async (msg) => {
+    if (messages.image) return;
     await dbService.updatePost(msg.$id, newMsg);
     setEditingMsgId(null);
   };
@@ -139,9 +145,17 @@ const Messages = () => {
                 />
               ) : (
                 <span
-                  className={`block text-xl font-semibold ${message.user_id === user?.$id ? "text-blue-700" : "text-white"}`}
+                  className={`block text-xl font-semibold  ${message.user_id === user?.$id ? "text-blue-700" : "text-white"}`}
                 >
-                  {message.body}
+                  {/*checks and displays */}
+                  {message.body && <p> {message.body}</p>}
+                  {message.image && (
+                    <img
+                      src={dbService.getFilePreview(message.image)}
+                      alt={message.username}
+                      className={`rounded-md hover:animate-pulse mx-5 mt-2 border-2 ${message.user_id === user?.$id ? "border-blue-600" : "border-white"}`}
+                    />
+                  )}
                 </span>
               )}
             </div>

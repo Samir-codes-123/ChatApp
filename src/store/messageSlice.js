@@ -3,6 +3,7 @@ const initialState = {
   status: false,
   userInfo: null,
   messages: [], //map
+  images: null,
 };
 const msgSlice = createSlice({
   name: "message",
@@ -12,7 +13,7 @@ const msgSlice = createSlice({
     login: (state, action) => {
       state.status = true;
       state.userInfo = action.payload;
-      console.log("useer", state.userInfo);
+      console.log("user", state.userInfo);
     },
     intialMsg: (state, action) => {
       state.messages = action.payload;
