@@ -7,7 +7,7 @@ const Header = () => {
     <div className="bg-blue-600 text-white p-4  shadow-md ">
       {user ? (
         <div className="text-xl font-medium flex justify-between items-center">
-          Welcome, {user.name}
+          Welcome {user.name}
           <Logout />
         </div>
       ) : (

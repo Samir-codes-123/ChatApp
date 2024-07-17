@@ -13,7 +13,7 @@ const msgSlice = createSlice({
     login: (state, action) => {
       state.status = true;
       state.userInfo = action.payload;
-      console.log("user", state.userInfo);
+      // console.log("user", state.userInfo);
     },
     intialMsg: (state, action) => {
       state.messages = action.payload;

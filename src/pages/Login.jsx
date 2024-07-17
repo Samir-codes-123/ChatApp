@@ -33,7 +33,7 @@ const Login = () => {
     console.log("Attempting to login with data:", data);
     try {
       const session = await authService.login(data);
-      console.log("Session:", session);
+      // console.log("Session:", session);
       if (session) {
         const userData = await authService.getCurrentUser();
         console.log("User data:", userData);
@@ -49,7 +49,10 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center bg-slate-200 space-y-6">
+    <div className="w-full h-full  flex flex-col justify-center items-center bg-slate-200 space-y-6">
+      <h1 className="text-center text-4xl font-semibold text-blue-600">
+        Welcome to SamChat
+      </h1>
       {error && (
         <div className="text-xl font-semibold text-red-600">
           {error}

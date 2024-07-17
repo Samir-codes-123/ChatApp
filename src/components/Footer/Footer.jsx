@@ -1,9 +1,8 @@
-import React from "react";
 import { Linkedin, Twitter, GitHub } from "react-feather";
 
 const Footer = () => {
   return (
-    <div className=" w-full  bg-blue-300 absolute">
+    <div className=" w-full  bg-blue-300 ">
       <footer className="p-4 text-center flex justify-evenly ">
         <div>
           <p className="font-thin font-sans w-max text-center">
@@ -18,7 +17,6 @@ const Footer = () => {
             href="https://www.linkedin.com/in/samir-khanal-713b68281/"
             target="_blank"
           >
-            <a href="https://x.com/SamirKh56782671" target="_blank"></a>{" "}
             <Linkedin className="text-blue-600" />
           </a>
           <a href="https://github.com/Samir-codes-123" target="_blank">

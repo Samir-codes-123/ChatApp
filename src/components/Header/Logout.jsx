@@ -10,7 +10,7 @@ const Logout = () => {
   return (
     <LogOut
       onClick={handleClick}
-      className="inline mx-2  text-white hover:text-red-700 cursor-pointer"
+      className="inline mx-2  text-white hover:text-red-700 hover:animate-pulse cursor-pointer"
     />
   );
 };

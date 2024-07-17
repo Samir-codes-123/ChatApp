@@ -1,26 +1,16 @@
-<<<<<<< HEAD
 ## ChatApp
 
-**Author:** [Samir-codes-123](https://github.com/Samir-codes-123)
+Author: [Samir-codes-123](https://github.com/Samir-codes-123)
 
 ChatApp is a real-time chat application built using React, Redux, and Appwrite for authentication and real-time messaging features. Styled with Tailwind CSS and deployed on Vercel, ChatApp provides a seamless and interactive messaging experience.
 
-=======
-
-## ChatApp
-
-**Author:** [Samir-codes-123](https://github.com/Samir-codes-123)
-
-ChatApp is a real-time chat application built using React, Redux, and Appwrite for authentication and real-time messaging features. Styled with Tailwind CSS and deployed on Vercel, ChatApp provides a seamless and interactive messaging experience.
-
->>>>>>> 7236fefb055c1503443d84d19f34d0db0ddfb9b6
 ### Features
 
-- **Real-time Messaging:** Instant message updates using Appwrite's real-time capabilities.
-- **User Authentication:** Secure authentication with Appwrite.
-- **Responsive Design:** Styled with Tailwind CSS for a clean, modern, and responsive design.
-- **Editable Messages:** Edit and delete messages with real-time updates.
-- **User-friendly Interface:** Easy-to-use interface with intuitive design.
+- Real-time Messaging: Instant message updates using Appwrite's real-time capabilities.
+- User Authentication: Secure authentication with Appwrite.
+- Responsive Design: Styled with Tailwind CSS for a clean, modern, and responsive design.
+- Editable Messages: Edit and delete messages with real-time updates.
+- User-friendly Interface: Easy-to-use interface with intuitive design.
 
 ### Tech Stack
 

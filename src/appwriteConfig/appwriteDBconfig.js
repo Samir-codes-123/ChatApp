@@ -55,7 +55,7 @@ export class DbService {
         conf.appwriteCollectionId,
         [Query.orderDesc("$createdAt")],
       );
-      console.log(response); // to check for error
+      //   console.log(response); // to check for error
       return response;
     } catch (error) {
       console.log("Appwrite service :: getPosts :: error", error);
@@ -77,9 +77,8 @@ export class DbService {
   }
 
   realTime(callback) {
-    console.log("Subscribing to real-time updates");
+    // console.log("Subscribing to real-time updates");
     this.unsubscribeFn = this.client.subscribe(
-      // returns a function
       `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId}.documents`,
       (response) => {
         if (response.error) {
@@ -93,9 +92,8 @@ export class DbService {
 
   unsubscribe() {
     if (this.unsubscribeFn) {
-      console.log("Unsubscribing from real-time updates");
+      //  console.log("Unsubscribing from real-time updates");
       this.unsubscribeFn(); // this.unsubscribeFn() calls the unsubscribe function, and then it clears the reference.
-      this.unsubscribeFn = null;
     }
   }
 

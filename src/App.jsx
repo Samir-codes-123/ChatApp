@@ -4,9 +4,11 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="w-full bg-slate-200">
+    <div className="w-full h-screen flex flex-col bg-slate-200">
       <Header />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

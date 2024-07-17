@@ -26,6 +26,8 @@ const Messages = () => {
 
     const handleRealtimeUpdate = (res) => {
       console.log("Real-time update received", res);
+      console.log(res);
+      if (!res) console.log("lado");
       // Handle different types of events
       if (
         res.events.includes(
@@ -67,7 +69,7 @@ const Messages = () => {
 
     await dbService.deletePost(msg.$id);
     if (msg.type === "media") {
-      dbService.deleteFile(msg.image); // file id saved in image
+      await dbService.deleteFile(msg.image); // file id saved in image
     } // works while reloading
     // dispatch(rmMsg(msg.$id)); dont need to do this done by realtime
   };
@@ -86,7 +88,7 @@ const Messages = () => {
   return (
     <div className="w-full h-full flex justify-center items-center bg-slate-200 p-4">
       <div className="h-full w-full max-w-4xl overflow-y-auto space-y-3">
-        {messages.map((message) => (
+        {messages?.map((message) => (
           <div
             key={message.$id}
             className={`max-w-md w-full p-4 border-2 rounded-lg shadow-md hover:bg-gradient-to-r from-blue-300 to-slate-400 cursor-move ${

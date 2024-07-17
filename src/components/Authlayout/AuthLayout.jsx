@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import authService from "../../appwriteConfig/appwriteAuthConfig";
 import { login as sliceLogin } from "../../store/messageSlice";
 import { Loader } from "react-feather";
+import dbService from "../../appwriteConfig/appwriteDBconfig";
 
 export default function Protected({ children, authentication = true }) {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Protected({ children, authentication = true }) {
     const onload = async () => {
       try {
         const userData = await authService.getCurrentUser();
-        console.log("User data:", userData);
+        // console.log("User data:", userData);
         if (userData) {
           dispatch(sliceLogin(userData));
         }
@@ -42,7 +43,7 @@ export default function Protected({ children, authentication = true }) {
   }, [authStatus, navigate, authentication, userFetched]);
 
   return loader ? (
-    <Loader className=" text-xl w-full h-32 animate-spin" />
+    <Loader className=" m-auto  w-32 h-32  items-center  animate-spin" />
   ) : (
     <>{children}</>
   );
