@@ -27,7 +27,7 @@ const Messages = () => {
     const handleRealtimeUpdate = (res) => {
       console.log("Real-time update received", res);
       console.log(res);
-      if (!res) console.log("lado");
+      // if (!res) console.log("lado");
       // Handle different types of events
       if (
         res.events.includes(
